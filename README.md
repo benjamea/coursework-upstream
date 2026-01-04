@@ -1,1 +1,1 @@
-CMSC 14100, Autumn 2026 Repository
+CMSC 14100, W'26 Repository

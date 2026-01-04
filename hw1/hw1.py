@@ -3,7 +3,7 @@ CMSC 14100
 Winter 2026
 Homework #1
 
-We use anonymous grading.  Pleae do not include your name in this file.
+We use anonymous grading.  Please do not include your name in this file.
 
 People Consulted:
    For future assignments, you will be expected to list anyone (other than the

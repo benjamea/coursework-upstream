@@ -16,7 +16,7 @@ Online resources consulted:
 
 def add2():
     ### Replace None with 2 + 2 in the next line.
-    return None
+    return 2 + 2
 
 if __name__ == "__main__":
     print("2 + 2 is", add2())

@@ -24,10 +24,7 @@ def add_one_and_multiply(a, x):
     Returns (int):
         The result of adding 1 to a and then multiplying by x
     """
-
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: add_one_and_multiply")
-
+    return (a + 1) * x
 
 # Exercise 2
 def is_snowing(temp_f, prec_in):
@@ -46,8 +43,7 @@ def is_snowing(temp_f, prec_in):
     """
     assert prec_in >= 0, "Precipitation amount cannot be negative"
 
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: is_snowing")
+    return (temp_f <= 32) and (prec_in > 0)
 
 
 # Exercise 3
@@ -61,9 +57,7 @@ def convert_fahrenheit_to_celsius(temp_f):
     Returns (int or float):
         The corresponding temperature in degrees Celsius
     """
-
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: convert_fahrenheit_to_celsius")
+    return (temp_f - 32) * (5 / 9)
 
 
 # Exercise 4
@@ -79,9 +73,8 @@ def is_extreme_temperature(temp_f):
     Returns (bool):
         True if the temperature is extreme, False otherwise
     """
-
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: is_extreme_temperature")
+    return (temp_f < -4.5) or (temp_f > 94.9)   
+         
 
 
 # Exercise 5
@@ -101,9 +94,7 @@ def can_flight_takeoff(temp_f, vel_mph, vis_mi):
     Returns (bool):
         True if takeoff is allowed, False otherwise
     """
-
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: can_flight_takeoff")
+    return (temp_f >= -10) and (vel_mph <= 30) and (vis_mi >= 3)
 
 
 # Exercise 6
@@ -121,8 +112,13 @@ def compute_wind_chill(temp_f, vel_mph):
     assert temp_f <= 50, "Temperature must be at or below 50°F"
     assert vel_mph > 3, "Wind speed must be greater than 3 mph"
 
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: compute_wind_chill")
+    v_pow = vel_mph ** 0.16
+    return (
+    35.74 + (0.6215 * temp_f) - 
+    (35.75 * v_pow) +
+    (0.4275 * temp_f * v_pow)
+    )
+
 
 
 # Exercise 7
@@ -144,5 +140,8 @@ def is_severe_weather(temp_f, vel_mph, vis_mi, prec_in):
         True if weather is severe, False otherwise
     """
 
-    ### delete the raise ValueError(...) code and replace with working code
-    raise ValueError("todo: is_severe_weather")
+    return (
+    is_extreme_temperature(temp_f)
+    or not can_flight_takeoff(temp_f, vel_mph, vis_mi)
+    or (prec_in > 10)
+    )

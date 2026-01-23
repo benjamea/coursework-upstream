@@ -175,7 +175,7 @@ def find_avg_var(prices):
         - Otherwise, the average value at risk
     """
     
-   if len(prices) == 0:
+    if len(prices) == 0:
         return None
 
     for p in prices:

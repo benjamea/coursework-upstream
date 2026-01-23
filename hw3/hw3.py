@@ -192,8 +192,8 @@ def find_avg_var(prices):
         var = find_value_at_risk(prices[i], prices[i - 1])
         if var is None:
           return None
-     total_var += var
-     count += 1
+        total_var += var
+        count += 1
 
     return total_var / count
 

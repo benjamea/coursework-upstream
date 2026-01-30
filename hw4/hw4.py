@@ -23,6 +23,7 @@ SPECIAL = 2
 # Exercise 1
 def count_number_of_each(password):
     """
+
     Count letters, digits, and special characters in a password.
 
     Args:
@@ -42,6 +43,7 @@ def count_number_of_each(password):
             counts[SPECIAL] += 1
 
     return counts
+
 
 # Exercise 2
 def compare(input, password, wildcards):
@@ -76,6 +78,7 @@ def compare(input, password, wildcards):
 # Exercise 3
 def compute_strength(password):
     """
+
     Compute the strength of a password.
 
     Args:
@@ -104,6 +107,7 @@ def compute_strength(password):
 # Exercise 4
 def brute_force_attack(length, password):
     """
+
     Simulate a brute-force attack to guess a password.
 
     Args:
@@ -137,6 +141,7 @@ def brute_force_attack(length, password):
 # Exercise 5
 def create_password(phrase, strength):
     """
+
     Create a password from a phrase using first letters of each word.
 
     Args:

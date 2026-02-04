@@ -1,0 +1,23 @@
+[project]
+name = "hw4"
+version = "0.1.0"
+description = "CS 141 W'26 Homework #4"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "ipython>=8.27.0",
+  "pytest>=8.3.4",
+  "ruff>=0.6.4",
+]
+
+[tool.ruff.lint]
+select = [
+  "E", # pycodestyle errors - handles basic Python style
+  "W", # pycodestyle warnings - handles whitespace issues
+  "F", # pyflakes - handles unused imports and variables
+  "N", # pep8-naming - handles naming conventions
+]
+ignore = [
+  "F401", # allow unused imports (useful for assignments)
+  "N818",
+]

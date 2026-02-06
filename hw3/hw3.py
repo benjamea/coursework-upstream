@@ -93,7 +93,8 @@ def get_stock_rating(return_on_investment, avg_value_at_risk):
     elif return_on_investment >= 1.4 and avg_value_at_risk >= 0.3:
         return "C"
 
-    else return "D"
+    else
+        return "D"
 
 
 def compare_stock_ratings(ratings_1, ratings_2):

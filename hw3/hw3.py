@@ -32,7 +32,7 @@ def find_relative_return(current_day_price, prev_day_price):
             - Returns None if either price is 0 or negative.
     """
     if current_day_price <= 0 or prev_day_price <= 0:
-     return None
+        return None
     return current_day_price / prev_day_price
 
 
@@ -69,31 +69,31 @@ def get_stock_rating(return_on_investment, avg_value_at_risk):
         avg_value_at_risk (float): the average value at risk
 
     Returns (str):
-        One of the follwoing ratings:
+        One of the following ratings:
         "AAA", "AA", "A", "BBB", "BB", "B", "C", or "D"
     """
     if return_on_investment >= 1.1 and avg_value_at_risk < 0.05:
         return "AAA"
 
-    if return_on_investment >= 1.1 and avg_value_at_risk < 0.1:
+    elif return_on_investment >= 1.1 and avg_value_at_risk < 0.1:
         return "AA"
 
-    if return_on_investment >= 1.1 and avg_value_at_risk < 0.15:
+    elif return_on_investment >= 1.1 and avg_value_at_risk < 0.15:
         return "A"
 
-    if return_on_investment >= 1.2 and avg_value_at_risk < 0.2:
+    elif return_on_investment >= 1.2 and avg_value_at_risk < 0.2:
         return "BBB"
 
-    if return_on_investment >= 1.2 and avg_value_at_risk < 0.25:
+    elif return_on_investment >= 1.2 and avg_value_at_risk < 0.25:
         return "BB"
 
-    if return_on_investment >= 1.2 and avg_value_at_risk < 0.3:
+    elif return_on_investment >= 1.2 and avg_value_at_risk < 0.3:
         return "B"
 
-    if return_on_investment >= 1.4 and avg_value_at_risk >= 0.3:
+    elif return_on_investment >= 1.4 and avg_value_at_risk >= 0.3:
         return "C"
 
-    return "D"
+    else return "D"
 
 
 def compare_stock_ratings(ratings_1, ratings_2):
@@ -186,16 +186,14 @@ def find_avg_var(prices):
         return 0.0
 
     total_var = 0.0
-    count = 0
 
     for i in range(1, len(prices)):
         var = find_value_at_risk(prices[i], prices[i - 1])
         if var is None:
-          return None
+            return None
         total_var += var
-        count += 1
 
-    return total_var / count
+    return total_var / (len(prices) - 1)
 
 def find_stock_rating_from_prices(prices):
     """

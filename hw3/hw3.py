@@ -49,13 +49,13 @@ def find_value_at_risk(current_day_price, prev_day_price):
         - Returns 0.0 if the relative return is greater than 1.0.
         - Otherwise, returns 1 minus the relative return.
     """
-    rel_return = find_relative_return(current_day_price, prev_day_price)
+    rel_return = find_relative_return(
+        current_day_price, prev_day_price
+    )
     if rel_return is None:
         return None
-
     if rel_return > 1.0:
         return 0.0
-
     return 1 - rel_return
 
 
@@ -69,7 +69,7 @@ def get_stock_rating(return_on_investment, avg_value_at_risk):
         avg_value_at_risk (float): the average value at risk
 
     Returns (str):
-        One of the follwoing ratings: 
+        One of the follwoing ratings:
         "AAA", "AA", "A", "BBB", "BB", "B", "C", or "D"
     """
     if return_on_investment >= 1.1 and avg_value_at_risk < 0.05:
@@ -114,13 +114,13 @@ def compare_stock_ratings(ratings_1, ratings_2):
     value_1 = 0
     value_2 = 0
 
-    
+
     for i in range(len(rating_order)):
         if ratings_1 == rating_order[i]:
             value_1 = i + 1
             break
 
-   
+
     for i in range(len(rating_order)):
         if ratings_2 == rating_order[i]:
             value_2 = i + 1
@@ -145,16 +145,16 @@ def find_period_return(prices):
         - None if any price is <= 0
         - Otherwise, last price divided by first price
     """
-    
+
     if len(prices) == 0:
         return None
 
-    
+
     for p in prices:
         if p <= 0:
             return None
 
-    
+
     first_price = prices[0]
     last_price = prices[len(prices) - 1]
 
@@ -174,7 +174,7 @@ def find_avg_var(prices):
         - 0.0 if there is only one valid price
         - Otherwise, the average value at risk
     """
-    
+
     if len(prices) == 0:
         return None
 

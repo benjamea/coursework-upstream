@@ -1,0 +1,17 @@
+[
+    {
+        "title": "entry 1",
+        "content": "the cat sat on the mat",
+        "tokens": ["entry", "1", "the", "cat", "sat", "on", "the", "mat"]
+    },
+    {
+        "title": "entry 2",
+        "content": "the dog sat on the log",
+        "tokens": ["entry", "2", "the", "dog", "sat", "on", "the", "log"]
+    },
+    {
+        "title": "entry 3",
+        "content": "the cat and the dog sat on the mat and the log",
+        "tokens": ["entry", "3", "the", "cat", "and", "the", "dog", "sat", "on", "the", "mat", "and", "the", "log"]
+    }
+]

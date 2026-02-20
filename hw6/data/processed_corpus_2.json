@@ -1,0 +1,17 @@
+[
+    {
+        "title": "homework 5 is now available",
+        "content": "hi all homework 5 is available https canvas uchicago edu courses 69158 assignments 849885",
+        "tokens": ["homework", "5", "is", "now", "available", "hi", "all", "homework", "5", "is", "available", "https", "canvas", "uchicago", "edu", "courses", "69158", "assignments", "849885"]
+    },
+    {
+        "title": "office hours change",
+        "content": "hi everyone my office will be held thursday 9am 11am over zoom link here this is a permanent change please come see me on thursdays for questions you can find our full office hours schedule here there are lots of office hours where you can make an appointment or swing by with any questions please make use of office hours if you have any questions don't forget that you can also post questions on here on ed",
+        "tokens": ["office", "hours", "change", "hi", "everyone", "my", "office", "will", "be", "held", "thursday", "9am", "11am", "over", "zoom", "link", "here", "this", "is", "a", "permanent", "change", "please", "come", "see", "me", "on", "thursdays", "for", "questions", "you", "can", "find", "our", "full", "office", "hours", "schedule", "here", "there", "are", "lots", "of", "office", "hours", "where", "you", "can", "make", "an", "appointment", "or", "swing", "by", "with", "any","questions","please","make","use","of","office","hours","if","you","have","any","questions","don't","forget","that","you","can","also","post","questions","on","here","on","ed"]
+    },
+    {
+        "title": "final exam date time",
+        "content": "the final exam schedule for winter 2026 is now available https registrar uchicago edu calendars final exams the exam for cs 141 will be held on wednesday march 11th from 3 5pm students are expected to be on campus to take the exam",
+        "tokens": ["final", "exam", "date", "time", "the", "final", "exam", "schedule", "for", "winter", "2026", "is", "now", "available", "https", "registrar", "uchicago", "edu", "calendars", "final", "exams", "the", "exam", "for", "cs", "141", "will", "be", "held", "on", "wednesday", "march", "11th", "from", "3", "5pm", "students", "are", "expected", "to", "be", "on", "campus", "to", "take","the","exam"]
+    }
+]

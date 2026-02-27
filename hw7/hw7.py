@@ -29,19 +29,22 @@ class File:
             name (str): The name of the file
             contents (str): The contents of the file
         """
-        raise ValueError("Not implemented")
+        self.name = name
+        self.__contents = contents
+        self.is_open = False
+        self.size = len(contents)
 
     def open_file(self):
         """ Open the file. """
-        raise ValueError("Not implemented")
+        self.is_open = True
 
     def close_file(self):
         """ Close the file. """
-        raise ValueError("Not implemented")
+        self.is_open = False
 
     def cat(self):
         """ Returns (str): The contents of a file. """
-        raise ValueError("Not implemented")
+        return self.__contents
 
     def redirect(self, input):
         """
@@ -53,7 +56,11 @@ class File:
         Returns (bool): True if input was successfully added, False
             otherwise.
         """
-        raise ValueError("Not implemented")
+        if not self.is_open:
+            return False
+        self.__contents += input
+        self.size = len(self.__contents)
+        return True
 
     def diff(self, other):
         """
@@ -66,7 +73,19 @@ class File:
         Returns: (string) difference between two files.
         """
         assert isinstance(other, File), "A file can only be diff'd with another file"
-        raise ValueError("Not implemented")
+        result = ""
+        c1 = self.__contents
+        c2 = other.__contents
+        length = max(len(c1), len(c2))
+        for i in range(length):
+            if i >= len(c1) or i >= len(c2):
+                result += "-"
+            elif c1[i] == c2[i]:
+                result += c1[i]
+            else:
+                result += "-"
+        return result
+
 
 class Directory:
     def __init__(self, name):
@@ -79,7 +98,8 @@ class Directory:
         Args:
             name (str): The name of the directory
         """
-        raise ValueError("Not implemented")
+        self.name = name
+        self.files = {}
 
     def add_file(self, f):
         """
@@ -109,7 +129,11 @@ class Directory:
         Returns (bool): True if new file was successfully created, False
             otherwise.
         """
-        raise ValueError("Not implemented")
+        if file_name in self.files and not replace:
+            return False
+        self.files[file_name] = File(file_name, contents)
+        return True
+
 
 class FileSystem:
     def __init__(self):
@@ -140,7 +164,11 @@ class FileSystem:
 
         Returns (list of str): A list of file names, sorted.
         """
-        raise ValueError("Not implemented")
+        result = []
+        for dir_name, directory in self.dirs.items():
+            for file_name in directory.files:
+                result.append(dir_name + "/" + file_name)
+        return sorted(result)
 
     def cp(self, file_name, origin_dir, destination_dir):
         """
@@ -153,4 +181,11 @@ class FileSystem:
 
         Returns (bool): True if successful, False otherwise.
         """
-        raise ValueError("Not implemented")
+        if origin_dir not in self.dirs or destination_dir not in self.dirs:
+            return False
+        if file_name not in self.dirs[origin_dir].files:
+            return False
+        original = self.dirs[origin_dir].files[file_name]
+        new_file = File(file_name, original.cat())
+        self.dirs[destination_dir].files[file_name] = new_file
+        return True

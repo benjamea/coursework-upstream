@@ -223,8 +223,25 @@ class Box2D:
 
 
 def split_box_on_dimension(box, dim):
-    """TODO"""
-    raise ValueError("Not Implemented")
+    """
+    Split a Box2D into two equal boxes along the given dimension.
+
+    Args:
+        box (Box2D): The box to split.
+        dim (int): X (0) to split along x-axis, Y (1) to split along y-axis.
+
+    Returns:
+        list[Box2D]: Two Box2D objects ordered by min value along split dim.
+    """
+    if dim == X:
+        mid = (box.min_x + box.max_x) / 2
+        box1 = Box2D(box.min_x, mid, box.min_y, box.max_y)
+        box2 = Box2D(mid, box.max_x, box.min_y, box.max_y)
+    else:
+        mid = (box.min_y + box.max_y) / 2
+        box1 = Box2D(box.min_x, box.max_x, box.min_y, mid)
+        box2 = Box2D(box.min_x, box.max_x, mid, box.max_y)
+    return [box1, box2]
 
 
 class Space2DNode:
@@ -248,25 +265,122 @@ class Space2DNode:
         self.points = []
 
     def is_valid_node(self):
-        """TODO"""
-        raise ValueError("Not Implemented")
+        """
+        Check that this node and all descendants satisfy tree invariants.
+
+        Returns:
+            bool: True if valid, False otherwise.
+        """
+        if self.children:
+            if len(self.children) != 2:
+                return False
+            if self.points:
+                return False
+            return all(child.is_valid_node() for child in self.children)
+        else:
+            for point in self.points:
+                if self.box.distance_to_point(point) > 0:
+                    return False
+            return True
 
     def build(self, depth):
-        """TODO"""
-        raise ValueError("Not Implemented")
+        """
+        Recursively build the tree to the given depth.
+
+        Args:
+            depth (int): Number of additional subdivision levels to add.
+        """
+        self._build(depth, X)
+
+    def _build(self, depth, dim):
+        """
+        Recursive helper for build.
+
+        Args:
+            depth (int): Remaining levels to build.
+            dim (int): Dimension to split on at this level.
+        """
+        if depth == 0:
+            return
+        boxes = split_box_on_dimension(self.box, dim)
+        self.children = [Space2DNode(b) for b in boxes]
+        next_dim = Y if dim == X else X
+        for child in self.children:
+            child._build(depth - 1, next_dim)
 
     def insert(self, point):
-        """TODO"""
-        raise ValueError("Not Implemented")
+        """
+        Insert a point into the correct leaf node of this subtree.
+
+        Args:
+            point (Point2D): The point to insert.
+        """
+        if not self.children:
+            self.points.append(point)
+        else:
+            for child in self.children:
+                if child.box.distance_to_point(point) <= 0:
+                    child.insert(point)
+                    return
 
     def get_nearest_neighbor(self, point):
-        """TODO"""
-        raise ValueError("Not Implemented")
+        """
+        Return the closest stored point to the query point.
 
+        Args:
+            point (Point2D): The query point.
+
+        Returns:
+            Point2D or None: Closest point, or None if tree is empty.
+        """
+        return self._get_nearest_neighbor(None, point)
+
+    def _get_nearest_neighbor(self, closest_so_far, point):
+        """
+        Recursive branch-and-bound helper.
+
+        Args:
+            closest_so_far (Point2D or None): Best point found so far.
+            point (Point2D): The query point.
+
+        Returns:
+            Point2D or None: Updated closest point.
+        """
+        if not self.children:
+            for p in self.points:
+                if closest_so_far is None or \
+                        point.distance_to(p) < point.distance_to(closest_so_far):
+                    closest_so_far = p
+            return closest_so_far
+        for child in self.children:
+            box_dist = child.box.distance_to_point(point)
+            if closest_so_far is None or \
+                    box_dist < point.distance_to(closest_so_far):
+                closest_so_far = child._get_nearest_neighbor(
+                    closest_so_far, point)
+        return closest_so_far
 
     def __repr__(self):
-        """TODO"""
-        raise ValueError("Not Implemented")
+        """
+        Return an indented hierarchical string representation of this subtree.
+        """
+        return self._repr_helper(0)
+
+    def _repr_helper(self, depth):
+        """
+        Recursive helper for __repr__.
+
+        Args:
+            depth (int): Current depth (controls indentation).
+
+        Returns:
+            str: Indented string for this node and its subtree.
+        """
+        indent = "\t" * depth
+        result = f"{indent}{self.box} with Points={len(self.points)}"
+        for child in self.children:
+            result += "\n" + child._repr_helper(depth + 1)
+        return result
 
 
 class Tree:
